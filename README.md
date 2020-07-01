@@ -8,9 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* Node 10+
-* npm 6+
-* strapi@3.0.0-beta.16+
+- Node 10+
+- npm 6+
+- strapi@3.0.0-beta.16+
 
 ### Installing
 
@@ -30,20 +30,26 @@ npm install strapi-provider-upload-azure-storage
 
 With a stable release of Strapi 3.0.0, the configuration was moved to a JavaScript file. Official documentation [here](https://strapi.io/documentation/v3.x/plugins/upload.html#using-a-provider).
 
-To enable the provider, create or edit the file at ```./config/plugins.js```.
+To enable the provider, create or edit the file at `./config/plugins.js`.
 
 This is an example plugins.js file for Azure storage:
+
 ```JavaScript
 module.exports = ({ env }) => ({
   upload: {
     provider: 'azure-storage',
     providerOptions: {
-      account: env('STORAGE_ACCOUNT'),
-      accountKey: env('STORAGE_ACCOUNT_KEY'),
-      serviceBaseURL: env('STORAGE_URL'),
-      containerName: env('STORAGE_CONTAINER_NAME'),
-      defaultPath: 'assets',
-      maxConcurrent: 10
+      azure: {
+        account: env('STORAGE_ACCOUNT'),
+        accountKey: env('STORAGE_ACCOUNT_KEY'),
+        serviceBaseURL: env('STORAGE_URL'),
+        containerName: env('STORAGE_CONTAINER_NAME'),
+        defaultPath: env('STORAGE_DEFAULT_PATH') || 'assets',
+        maxConcurrent: 10
+      },
+      imgix: {
+        serviceBaseURL: env('IMAGE_CDN_URL'),
+      }
     }
   }
 });
@@ -62,7 +68,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Jake Feldman** - *Initial work* - [jakeFeldman](https://github.com/jakeFeldman)
+- **Jake Feldman** - _Initial work_ - [jakeFeldman](https://github.com/jakeFeldman)
 
 ## License
 
@@ -70,5 +76,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* strapi.io
-* Azure
+- strapi.io
+- Azure
